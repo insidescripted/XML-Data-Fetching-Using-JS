@@ -1,0 +1,116 @@
+/*
+All XML elements can be accessed through the XML DOM.
+The XML DOM is:
+- A standard object model for XML
+- A standard programming interface for XML
+- Platform- and language-independent
+*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+<html>
+  <head>
+    <title> Fetching Data from a XML File </title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+<body>
+  <header>
+    <h1> Fetching Data from a XML File </h1>
+  </header>
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /*
+All modern browsers support the XMLHttpRequest object :-
+-------------------------------------------------------
+- The XMLHttpRequest object can be used to exchange data with a web server behind the scenes. 
+- This means that it is possible to update parts of a web page, without reloading the whole page. All modern browsers (Chrome, Firefox, IE7+, Edge, Safari, Opera) have a built-in XMLHttpRequest object.
+onreadystatechange	Defines a function to be called when the readyState property changes
+readyState	Holds the status of the XMLHttpRequest.
+- 0: request not initialized
+- 1: server connection established
+- 2: request received
+- 3: processing request
+- 4: request finished and response is ready
+:::::::::::::::::
+status	200: "OK"
+:::::::::::::::::
+- 403: "Forbidden"
+- 404: "Page not found"
+For a complete list go to the Http Messages Reference
+statusText	Returns the status-text (e.g. "OK" or "Not Found")
+- The onreadystatechange function is called every time the readyState changes.
+- When readyState is 4 and status is 200, the response is ready:
+*/
+:::::::::::::::::
+<p id="demo"></p>
+:::::::::::::::::
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+        buildHouseList(xml);
+        buildSwordList(xml);
+    }
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+XML Parser :-
+------------
+The XML DOM (Document Object Model) defines the properties and methods for accessing and editing XML.
+However, before an XML document can be accessed, it must be loaded into an XML DOM object.
+All modern browsers have a built-in XML parser that can convert text into an XML DOM object.
+*/
+xhttp.open("GET", "books.xml", true);
+xhttp.send();
+function myFunction(xml) {
+    var xmlDoc = xml.responseXML;
+    document.getElementById("demo").innerHTML =
+    xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+       function buildHouseList(x){
+            let list = document.getElementById('houses');
+            let houses = x.getElementsByTagName('house');
+            for(let i=0; i<houses.length; i++){
+                let li = document.createElement('li');
+                let house = houses[i].firstChild.nodeValue;
+                li.textContent = house;
+                list.appendChild(li);
+            }
+        }
+        function buildSwordList(x){
+            let list = document.getElementById('swords');
+            let swords = x.getElementsByTagName('sword');
+            for(let i=0; i<swords.length; i++){
+                let li = document.createElement('li');
+                let swordName = swords[i].firstChild.nodeValue;
+                let person = swords[i].getAttribute('owner');
+                li.textContent = `${swordName} - ${person}`;
+                list.appendChild(li);
+            }
+        }
+*/
+</script>
+</body>
+</html>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
